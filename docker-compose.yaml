@@ -1,6 +1,6 @@
 services:
   namenode:
-    image: infravibe/hadoop:3.3.6
+    image: infravibe/hadoop:3.4.1
     platform: linux/amd64
     hostname: namenode
     container_name: namenode
@@ -26,7 +26,7 @@ services:
       - apache
 
   datanode1:
-    image: infravibe/hadoop:3.3.6
+    image: infravibe/hadoop:3.4.1
     platform: linux/amd64
     hostname: datanode1
     container_name: datanode1
@@ -43,7 +43,7 @@ services:
       - apache
 
   datanode2:
-    image: infravibe/hadoop:3.3.6
+    image: infravibe/hadoop:3.4.1
     platform: linux/amd64
     hostname: datanode2
     container_name: datanode2
@@ -60,7 +60,7 @@ services:
       - apache
 
   resourcemanager:
-    image: infravibe/hadoop:3.3.6
+    image: infravibe/hadoop:3.4.1
     platform: linux/amd64
     hostname: resourcemanager
     container_name: resourcemanager
@@ -76,7 +76,7 @@ services:
       - apache
 
   nodemanager1:
-    image: infravibe/hadoop:3.3.6
+    image: infravibe/hadoop:3.4.1
     platform: linux/amd64
     hostname: nodemanager1
     container_name: nodemanager1
@@ -92,7 +92,7 @@ services:
       - apache
 
   nodemanager2:
-    image: infravibe/hadoop:3.3.6
+    image: infravibe/hadoop:3.4.1
     platform: linux/amd64
     hostname: nodemanager2
     container_name: nodemanager2
@@ -108,7 +108,7 @@ services:
       - apache
 
   historyserver:
-    image: infravibe/hadoop:3.3.6
+    image: infravibe/hadoop:3.4.1
     platform: linux/amd64
     hostname: historyserver
     container_name: historyserver

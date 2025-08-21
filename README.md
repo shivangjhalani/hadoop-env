@@ -1,6 +1,6 @@
 # Hadoop Docker Compose (infravibe/hadoop)
 
-Multi-node Hadoop (HDFS + YARN + MR HistoryServer) using `infravibe/hadoop:3.3.6`.
+Multi-node Hadoop (HDFS + YARN + MR HistoryServer) using `infravibe/hadoop:3.4.1`.
 
 - Reference: [Building a Multi-Node Hadoop Cluster with Docker](https://akashsahani2001.medium.com/building-a-multi-node-hadoop-cluster-with-docker-a-complete-production-ready-setup-by-akash-fa1adfd605ec)
 - Docker Hub: [`https://hub.docker.com/r/infravibe/hadoop`](https://hub.docker.com/r/infravibe/hadoop)
@@ -71,7 +71,7 @@ docker exec -it namenode bash -lc 'hdfs dfs -mkdir -p /test; echo Hello Hadoop! 
 
 # MapReduce wordcount
 
-docker exec -it namenode bash -lc 'out=/output_$(date +%s); hadoop jar /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.6.jar wordcount /test/test.txt $out; hdfs dfs -cat $out/part-r-00000'
+docker exec -it namenode bash -lc 'out=/output_$(date +%s); hadoop jar /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.4.1.jar wordcount /test/test.txt $out; hdfs dfs -cat $out/part-r-00000'
 ```
 
 ## Stop
@@ -80,4 +80,26 @@ docker exec -it namenode bash -lc 'out=/output_$(date +%s); hadoop jar /opt/hado
 # docker compose down -v # remove volumes
 ```
 
-Note: `dfs.datanode.hostname` is set to `localhost` in `config/hdfs-site.xml` per the article. Use host IP/DNS if accessing WebHDFS remotely.
+## Cleanup (delete images and volumes)
+- Targeted (this project only):
+```bash
+# stop and remove containers + named volumes used by this compose
+docker compose down -v
+
+# remove the external network used by this setup (optional)
+docker network rm apache || true
+
+# explicitly remove named volumes if they still exist
+docker volume rm \
+  hadoop-environment_namenode_data \
+  hadoop-environment_datanode1_data \
+  hadoop-environment_datanode2_data 2>/dev/null || true
+
+# remove the pulled image
+docker rmi -f infravibe/hadoop:3.4.1 || true
+```
+
+- Global (dangerous: deletes ALL unused containers, images, networks, and volumes):
+```bash
+docker system prune -a --volumes --force
+```
