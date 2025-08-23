@@ -22,9 +22,9 @@
     <value>true</value>
   </property>
   <!-- Override the address DataNodes will use for WebHDFS redirect responses. Adjust as needed. -->
-  <property>
+  <!-- REMOVE or COMMENT OUT THE FOLLOWING LINE: -->
+  <!-- <property>
     <name>dfs.datanode.hostname</name>
     <value>localhost</value>
-  </property>
+  </property> -->
 </configuration>
-
